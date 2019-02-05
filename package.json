@@ -4,7 +4,13 @@
   "description": "You can use the [editor on GitHub](https://github.com/banjo-project/banjo-project-backend/edit/master/README.md) to maintain and preview the content for your website in Markdown files.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js",
+    "knex": "knex",
+    "latest": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run"
   },
   "repository": {
     "type": "git",
