@@ -4,7 +4,7 @@
 
 ```bash
 npm install
-createdb bbanjo_project_db
+createdb banjo_project_db
 npm run latest
 npm run seed
 
