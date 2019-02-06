@@ -43,10 +43,10 @@ function createUser (pet_id, username, password, email, phone_number, title) {
     })
 }
 
-function createPet (petName, petBirthday, petBreed, petSex) {
+function createPet (petName, petBirthday, petBreed, petImg, petSex) {
   return (
     knex('pets')
-      .insert({ name: petName, birthday: petBirthday, breed: petBreed, sex: petSex })
+      .insert({ name: petName, birthday: petBirthday, breed: petBreed, image: petImg, sex: petSex })
       .returning('*')
   )
 }

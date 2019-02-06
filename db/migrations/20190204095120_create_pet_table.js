@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
       table.string('name').notNullable()
       table.date('birthday').nullable()
       table.string('breed').nullable()
+      table.string('image')
       table.enu('sex', ['BOY', 'GIRL']).notNullable()
   })
 };

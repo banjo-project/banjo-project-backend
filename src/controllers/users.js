@@ -13,7 +13,7 @@ async function createUser (req, res, next) {
     }
     const pet = await userModel.getOnePet(req.body.petName, req.body.petSex, req.body.petBirthday)
     if (!pet) {
-      const [petData] = await userModel.createPet(req.body.petName, req.body.petBirthday, req.body.petBreed, req.body.petSex)
+      const [petData] = await userModel.createPet(req.body.petName, req.body.petBirthday, req.body.petBreed, req.body.petSex, req.body.petImg)
       const data = await userModel.createUser(petData.id, req.body.username, req.body.password, req.body.email, req.body.phone_number, req.body.title)
       return res.status(201).send({ data })
     }
