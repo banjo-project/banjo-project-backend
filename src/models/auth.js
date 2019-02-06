@@ -19,7 +19,7 @@ const login = (email, password) => {
 
 const getUser = userId => {
   return knex('team_membership')
-    .where({'team_membership.user_id': userId})
+    .where({ 'team_membership.user_id': userId })
 }
 
 module.exports = { login, getUser }
