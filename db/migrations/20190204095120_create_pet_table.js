@@ -1,15 +1,15 @@
 
-exports.up = function(knex, Promise) {
+exports.up = function (knex, Promise) {
   return knex.schema.createTable('pets', table => {
-      table.increments()
-      table.string('name').notNullable()
-      table.date('birthday').nullable()
-      table.string('breed').nullable()
-      table.string('image')
-      table.enu('sex', ['BOY', 'GIRL']).notNullable()
+    table.increments()
+    table.string('name').notNullable()
+    table.date('birthday').nullable()
+    table.string('breed').nullable()
+    table.string('image')
+    table.enu('sex', ['BOY', 'GIRL']).notNullable()
   })
-};
+}
 
-exports.down = function(knex, Promise) {
-    return knex.schema.dropTableIfExists('pets')
-};
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTableIfExists('pets')
+}

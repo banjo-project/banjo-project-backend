@@ -2,21 +2,17 @@ const knex = require('../../db/index')
 const bcrypt = require('bcrypt')
 
 function getUserByEmail (email) {
-  return (
-    knex('users')
-      .where({ 'email': email })
-      .first()
-  )
+  return knex('users')
+    .where({ 'email': email })
+    .first()
 }
 
 const getAllUsers = () => knex('users')
 
 function getOnePet (petName, petSex, petBirthday) {
-  return (
-    knex('pets')
-      .where({ 'name': petName, 'sex': petSex, 'birthday': petBirthday })
-      .first()
-  )
+  return knex('pets')
+    .where({ 'name': petName, 'sex': petSex, 'birthday': petBirthday })
+    .first()
 }
 
 function createUser (pet_id, username, password, email, phone_number, title) {
@@ -44,11 +40,42 @@ function createUser (pet_id, username, password, email, phone_number, title) {
 }
 
 function createPet (petName, petBirthday, petBreed, petImg, petSex) {
-  return (
-    knex('pets')
-      .insert({ name: petName, birthday: petBirthday, breed: petBreed, image: petImg, sex: petSex })
-      .returning('*')
-  )
+  return knex('pets')
+    .insert({ name: petName, birthday: petBirthday, breed: petBreed, image: petImg, sex: petSex })
+    .returning('*')
+}
+
+function getUsersForPet (petId) {
+  return knex('users')
+    .join('users_pets', 'user_id', 'users.id')
+    .where('users_pets.pet_id', petId)
+}
+
+function getPetInfo (petId) {
+  return knex('pets')
+    .where({ 'id': petId })
+    .first()
+}
+
+function getAllEvents (petId) {
+  return knex('events')
+    .where('events.pet_id', petId)
+}
+
+function getAllCompletedEvents (petId) {
+  return knex('events')
+    .innerJoin('completed_events', 'events.id', 'completed_events.event_id')
+    .innerJoin('users', 'users.id', 'completed_events.user_id')
+    .where('events.pet_id', petId)
+    // .then(result => {
+    //   const events = result.map(ele => ele.id)
+    //   return knex ('completed_events')
+    //     .innerJoin('users', 'users.id', 'completed_events.user_id')
+    //     .innerJoin('events', 'events.id', 'completed_events.event_id')
+    //     .where(event => {
+    //       event.whereIn('completed_events.event_id', events)
+    //     })
+    // })
 }
 
 module.exports = {
@@ -56,5 +83,9 @@ module.exports = {
   getAllUsers,
   getOnePet,
   createUser,
-  createPet
+  createPet,
+  getUsersForPet,
+  getPetInfo,
+  getAllEvents,
+  getAllCompletedEvents
 }

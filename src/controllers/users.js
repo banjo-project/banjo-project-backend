@@ -24,7 +24,37 @@ async function createUser (req, res, next) {
   }
 }
 
+async function getUsersForPet (req, res, next) {
+  try {
+    const data = await userModel.getUsersForPet(req.params.petId)
+    return res.status(201).send({ data })
+  } catch (err) {
+    return next({ status: 400, message: err })
+  }
+}
+
+async function getPetInfo (req, res, next) {
+  try {
+    const data = await userModel.getPetInfo(req.params.petId)
+    return res.status(201).send({ data })
+  } catch (err) {
+    return next({ status: 400, message: err })
+  }
+}
+
+async function getAllEvents (req, res, next) {
+  try {
+    const data = await userModel.getAllCompletedEvents(req.params.petId)
+    return res.status(201).send({ data })
+  } catch (err) {
+    return next({ status: 400, message: err })
+  }
+}
+
 module.exports = {
   getAllUsers,
-  createUser
+  createUser,
+  getUsersForPet,
+  getPetInfo,
+  getAllEvents
 }

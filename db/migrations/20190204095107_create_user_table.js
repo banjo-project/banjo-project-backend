@@ -1,5 +1,5 @@
 
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable('users', table => {
     table.increments()
     table.string('email').notNullable().unique()
@@ -8,9 +8,8 @@ exports.up = function(knex) {
     table.bigInteger('phone_number').unique()
     table.string('title').nullable()
   })
-};
-    
-exports.down = function(knex) {
+}
+
+exports.down = function (knex) {
   return knex.schema.dropTableIfExists('users')
-};
-    
+}
