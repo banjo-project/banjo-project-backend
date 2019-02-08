@@ -62,22 +62,6 @@ function getAllEvents (petId) {
     .where('events.pet_id', petId)
 }
 
-function getAllCompletedEvents (petId) {
-  return knex('events')
-    .innerJoin('completed_events', 'events.id', 'completed_events.event_id')
-    .innerJoin('users', 'users.id', 'completed_events.user_id')
-    .where('events.pet_id', petId)
-    // .then(result => {
-    //   const events = result.map(ele => ele.id)
-    //   return knex ('completed_events')
-    //     .innerJoin('users', 'users.id', 'completed_events.user_id')
-    //     .innerJoin('events', 'events.id', 'completed_events.event_id')
-    //     .where(event => {
-    //       event.whereIn('completed_events.event_id', events)
-    //     })
-    // })
-}
-
 module.exports = {
   getUserByEmail,
   getAllUsers,
@@ -86,6 +70,5 @@ module.exports = {
   createPet,
   getUsersForPet,
   getPetInfo,
-  getAllEvents,
-  getAllCompletedEvents
+  getAllEvents
 }

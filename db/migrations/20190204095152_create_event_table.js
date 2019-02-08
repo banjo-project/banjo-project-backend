@@ -7,9 +7,6 @@ exports.up = function (knex) {
     table.string('note').nullable()
     table.integer('time').notNullable()
     table.timestamps(true, true)
-    table.boolean('is_completed').defaultTo(false)
-    table.string('completed_comment').nullable()
-    table.string('completed_image').nullable()
   })
 }
 
