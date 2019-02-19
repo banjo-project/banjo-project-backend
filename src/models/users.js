@@ -9,13 +9,15 @@ function getUserByEmail (email) {
 
 const getAllUsers = () => knex('users')
 
-function getOnePet (petName, petSex, petBirthday) {
+const getAllPets = () => knex('pets')
+
+function getOnePet (petId) {
   return knex('pets')
-    .where({ 'name': petName, 'sex': petSex, 'birthday': petBirthday })
+    .where({ 'id': petId })
     .first()
 }
 
-function createUser (pet_id, username, password, email, phone_number, title) {
+function createUser (petId, username, password, email, phone_number, title) {
   return getUserByEmail(email)
     .then(function (data) {
       if (data) throw { status: 400, message:'User already exists'}
@@ -29,7 +31,7 @@ function createUser (pet_id, username, password, email, phone_number, title) {
       )
         .then(([data]) => {
           return knex('users_pets')
-            .insert({ user_id: data.id, pet_id: pet_id })
+            .insert({ user_id: data.id, pet_id: petId })
             .returning('*')
         })
     })
@@ -43,6 +45,7 @@ function createPet (petName, petBirthday, petBreed, petImg, petSex) {
   return knex('pets')
     .insert({ name: petName, birthday: petBirthday, breed: petBreed, image: petImg, sex: petSex })
     .returning('*')
+    .then(([data]) => data)
 }
 
 function getUsersForPet (petId) {
@@ -59,16 +62,51 @@ function getPetInfo (petId) {
 
 function getAllEvents (petId) {
   return knex('events')
+    .select('events.*')
+    .leftJoin('completed_events', 'events.id', 'completed_events.event_id')
+    .where({
+      'completed_events.completed_time': null,
+      'events.pet_id': petId
+    })
+}
+
+function getAllCompletedEvents (petId) {
+  return knex('events')
     .where('events.pet_id', petId)
+    .rightJoin('completed_events', 'events.id', 'completed_events.event_id')
+}
+
+function createEvent (petId, event_type, time) {
+  return knex('events')
+    .insert({ pet_id: petId, event_type: event_type, time: time })
+    .returning('*')
+}
+
+function createCompletedEvent (eventId, userId, completed_time, comment, image) {
+  return knex('completed_events')
+    .insert({ event_id: eventId, user_id: userId, completed_time: completed_time, comment: comment, image: image })
+    .returning('*')
+}
+
+function deleteAllEvents (petId) {
+  return knex('events')
+    .where({ 'pet_id': petId })
+    .join('completed_event', 'event_id', 'events.id')
+    .del()
 }
 
 module.exports = {
   getUserByEmail,
   getAllUsers,
+  getAllPets,
   getOnePet,
   createUser,
   createPet,
   getUsersForPet,
   getPetInfo,
-  getAllEvents
+  getAllEvents,
+  getAllCompletedEvents,
+  createEvent,
+  createCompletedEvent, 
+  deleteAllEvents
 }

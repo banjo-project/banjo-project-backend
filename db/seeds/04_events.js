@@ -3,12 +3,12 @@ exports.seed = function (knex) {
   return knex('events').del()
     .then(function () {
       return knex('events').insert([
-        { id: 1, pet_id: 1, event_type: 'WALK', time: '8' },
-        { id: 2, pet_id: 1, event_type: 'POTTY', time: '8', note: 'need to give him a treat' },
-        { id: 3, pet_id: 1, event_type: 'WALK', time: '11' },
-        { id: 4, pet_id: 1, event_type: 'WALK', time: '17' },
-        { id: 5, pet_id: 1, event_type: 'POTTY', time: '17' },
-        { id: 6, pet_id: 1, event_type: 'EAT', time: '18' }
+        { id: 1, pet_id: 1, event_type: 'walk', time: '08:00 AM' },
+        { id: 2, pet_id: 1, event_type: 'potty', time: '08:00 AM' },
+        { id: 3, pet_id: 1, event_type: 'walk', time: '11:10 AM' },
+        { id: 4, pet_id: 1, event_type: 'walk', time: '05:20 PM' },
+        { id: 5, pet_id: 1, event_type: 'potty', time: '05:20 PM' },
+        { id: 6, pet_id: 1, event_type: 'eat', time: '06:00 PM' }
       ])
     })
     .then(() => {

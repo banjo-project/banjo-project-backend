@@ -6,19 +6,25 @@ const getAllUsers = (req, res, next) => {
     .catch(next)
 }
 
+const getAllPets = (req, res, next) => {
+  userModel.getAllPets()
+    .then((data) => res.send({ data }))
+    .catch(next)
+}
+
 async function createUser (req, res, next) {
   try {
-    if (!req.body.username && !req.body.password && !req.body.email && req.body.petName && req.body.petSex && req.body.petBirthday) {
+    if (!req.body.username && !req.body.password && !req.body.email) {
       return next({ status: 400, message: 'Bad Request' })
+    } if (!req.body.petId) {
+      const petData = await userModel.createPet(req.body.petName, req.body.petBirthday, req.body.petBreed, req.body.petImg, req.body.petSex)
+      console.log(petData)
+      const userData = await userModel.createUser(petData.id, req.body.username, req.body.password, req.body.email, req.body.phone_number, req.body.title)
+      return res.status(201).send({ userData })
+    } else {
+      const userData = await userModel.createUser(req.body.petId, req.body.username, req.body.password, req.body.email, req.body.phone_number, req.body.title)
+      return res.status(201).send({ userData })
     }
-    const pet = await userModel.getOnePet(req.body.petName, req.body.petSex, req.body.petBirthday)
-    if (!pet) {
-      const [petData] = await userModel.createPet(req.body.petName, req.body.petBirthday, req.body.petBreed, req.body.petSex, req.body.petImg)
-      const data = await userModel.createUser(petData.id, req.body.username, req.body.password, req.body.email, req.body.phone_number, req.body.title)
-      return res.status(201).send({ data })
-    }
-    const data = await userModel.createUser(pet.id, req.body.username, req.body.password, req.body.email, req.body.phone_number, req.body.title)
-    return res.status(201).send({ data })
   } catch (err) {
     return next({ status: 400, message: err })
   }
@@ -51,10 +57,56 @@ async function getAllEvents (req, res, next) {
   }
 }
 
+async function getAllCompletedEvents (req, res, next) {
+  try {
+    const data = await userModel.getAllCompletedEvents(req.params.petId, req.body.event_type, req.body.time)
+    return res.status(201).send({ data })
+  } catch (err) {
+    return next({ status: 400, message: err })
+  }
+}
+
+async function createEvent (req, res, next) {
+  try {
+    if (!req.params.petId && !req.body.event_type && !req.body.time) {
+      return next({ status: 400, message: 'Bad Request' })
+    } const data = await userModel.createEvent(req.params.petId, req.body.event_type, req.body.time)
+    return res.status(201).send({ data })
+  } catch (err) {
+    return next({ status: 400, message: err })
+  }
+}
+
+async function createCompletedEvent (req, res, next) {
+  try {
+    if (!req.params.eventId && !req.params.userId && !req.body.completed_time) {
+      return next({ status: 400, message: 'Bad Request' })
+    } const data = await userModel.createCompletedEvent(req.params.eventId, req.params.userId, req.body.completed_time, req.body.comment, req.body.image)
+    return res.status(201).send({ data })
+  } catch (err) {
+    return next({ status: 400, message: err })
+  }
+}
+
+async function deleteAllEvents (req, res, next) {
+  try {
+    const data = await userModel.deleteAllEvents(req.params.petId)
+    console.log(data)
+    return res.status(201).send({ data })
+  } catch (err) {
+    return next({ status: 400, message: err })
+  }
+}
+
 module.exports = {
   getAllUsers,
+  getAllPets,
   createUser,
   getUsersForPet,
   getPetInfo,
-  getAllEvents
+  getAllEvents,
+  getAllCompletedEvents,
+  createEvent,
+  createCompletedEvent,
+  deleteAllEvents
 }
