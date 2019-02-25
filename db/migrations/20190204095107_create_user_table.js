@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.string('email').notNullable().unique()
     table.text('password').notNullable()
     table.string('username').notNullable()
-    table.bigInteger('phone_number').unique()
+    table.text('image')
     table.string('title').nullable()
   })
 }

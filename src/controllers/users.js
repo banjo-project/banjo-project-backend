@@ -12,17 +12,22 @@ const getAllPets = (req, res, next) => {
     .catch(next)
 }
 
+const getPetUserInfo = (req, res, next) => {
+  userModel.getPetUserInfo(req.params.userId)
+    .then(([data]) => res.send({ data }))
+    .catch(next)
+}
+
 async function createUser (req, res, next) {
   try {
     if (!req.body.username && !req.body.password && !req.body.email) {
       return next({ status: 400, message: 'Bad Request' })
     } if (!req.body.petId) {
       const petData = await userModel.createPet(req.body.petName, req.body.petBirthday, req.body.petBreed, req.body.petImg, req.body.petSex)
-      console.log(petData)
-      const userData = await userModel.createUser(petData.id, req.body.username, req.body.password, req.body.email, req.body.phone_number, req.body.title)
+      const userData = await userModel.createUser(petData.id, req.body.username, req.body.password, req.body.email, req.body.image, req.body.title)
       return res.status(201).send({ userData })
     } else {
-      const userData = await userModel.createUser(req.body.petId, req.body.username, req.body.password, req.body.email, req.body.phone_number, req.body.title)
+      const userData = await userModel.createUser(req.body.petId, req.body.username, req.body.password, req.body.email, req.body.image, req.body.title)
       return res.status(201).send({ userData })
     }
   } catch (err) {
@@ -101,6 +106,7 @@ async function deleteAllEvents (req, res, next) {
 module.exports = {
   getAllUsers,
   getAllPets,
+  getPetUserInfo,
   createUser,
   getUsersForPet,
   getPetInfo,

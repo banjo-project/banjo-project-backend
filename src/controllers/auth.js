@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const login = (req, res, next) => {
   if (!req.body.email || !req.body.password) {
-    return next({ status: 400, message: 'Bad Request!' })
+    return next({ status: 400, message: 'Bad Request' })
   }
   auth.login(req.body.email, req.body.password)
     .then(user => {
@@ -28,7 +28,7 @@ const authenticated = (req, res, next) => {
 
 const isSelf = (req, res, next) => {
   if (parseInt(req.params.userId) !== req.claim.id) {
-    return next({ status: 401, message: '---Unauthorized' })
+    return next({ status: 401, message: '-Unauthorized' })
   } next()
 }
 const isManager = async (req, res, next) => {

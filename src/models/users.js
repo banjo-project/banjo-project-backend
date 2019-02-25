@@ -11,13 +11,20 @@ const getAllUsers = () => knex('users')
 
 const getAllPets = () => knex('pets')
 
+function getPetUserInfo (userId) {
+  return knex('pets')
+    .join('users_pets', 'pet_id', 'pets.id')
+    .where('users_pets.user_id', userId)
+    .returning('*')
+}
+
 function getOnePet (petId) {
   return knex('pets')
     .where({ 'id': petId })
     .first()
 }
 
-function createUser (petId, username, password, email, phone_number, title) {
+function createUser (petId, username, password, email, image, title) {
   return getUserByEmail(email)
     .then(function (data) {
       if (data) throw { status: 400, message:'User already exists'}
@@ -26,7 +33,7 @@ function createUser (petId, username, password, email, phone_number, title) {
     .then(function (password) {
       return (
         knex('users')
-          .insert({ email, username, password, phone_number, title })
+          .insert({ email, username, password, image, title })
           .returning('*')
       )
         .then(([data]) => {
@@ -99,6 +106,7 @@ module.exports = {
   getUserByEmail,
   getAllUsers,
   getAllPets,
+  getPetUserInfo,
   getOnePet,
   createUser,
   createPet,

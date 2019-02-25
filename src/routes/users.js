@@ -4,6 +4,7 @@ const ctrl = require('../controllers/users')
 
 router.post('/users', ctrl.createUser)
 router.get('/users', ctrl.getAllUsers)
+router.get('/users/:userId', ctrl.getPetUserInfo)
 router.get('/pets', ctrl.getAllPets)
 router.get('/pets/:petId', ctrl.getPetInfo)
 router.get('/pets/:petId/users', ctrl.getUsersForPet)

@@ -8,7 +8,10 @@ exports.seed = function (knex) {
         { id: 3, pet_id: 1, event_type: 'walk', time: '11:10 AM' },
         { id: 4, pet_id: 1, event_type: 'walk', time: '05:20 PM' },
         { id: 5, pet_id: 1, event_type: 'potty', time: '05:20 PM' },
-        { id: 6, pet_id: 1, event_type: 'eat', time: '06:00 PM' }
+        { id: 6, pet_id: 1, event_type: 'eat', time: '06:00 PM' },
+        { id: 7, pet_id: 1, event_type: 'walk', time: '09:00 PM' },
+        { id: 8, pet_id: 1, event_type: 'potty', time: '09:00 PM' },
+        { id: 9, pet_id: 1, event_type: 'eat', time: '10:20 PM' },
       ])
     })
     .then(() => {

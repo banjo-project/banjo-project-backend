@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.integer('user_id').references('users.id').onDelete('CASCADE').notNullable()
     table.string('completed_time').notNullable()
     table.string('comment')
-    table.string('image')
+    table.text('image')
   })
 }
 
