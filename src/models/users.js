@@ -57,6 +57,7 @@ function createPet (petName, petBirthday, petBreed, petImg, petSex) {
 
 function getUsersForPet (petId) {
   return knex('users')
+    .select('user_id', 'email', 'username', 'image', 'title', 'pet_id')
     .join('users_pets', 'user_id', 'users.id')
     .where('users_pets.pet_id', petId)
 }
