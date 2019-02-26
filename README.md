@@ -1,9 +1,12 @@
-# Banjo Project Backend
+# MY PET PAL Backend
 
-Take care of your puppy, all record at your fingertips!
-My Pet Pal is your solution to staying on top of your dog's daily activities.
-Stay updated on what your dog is up to, whether sleeping, walking, pottying, eating and so on. You can invite others to work together with you to ensure that your dog or dogs are well taken care of. You can also notify uncompleted activities to remind of other users. 
-My Pet Pal's goal is to make the lives of all dogs happier. Happy dogs means a happier world!
+Take care of your puppy, all record at your fingertips!<br />
+<br />
+My Pet Pal is your solution to staying on top of your dog's daily activities.<br />
+Stay updated on what your dog is up to, whether sleeping, walking, pottying, eating and so on. You can invite others to work together with you to ensure that your dog or dogs are well taken care of. You can also notify uncompleted activities to remind of other users. <br />
+<br />
+My Pet Pal's goal is to make the lives of all dogs happier. Happy dogs means a happier world!<br />
+<br />
 
 ### Deployed backend
 https://banjo-project.herokuapp.com/
