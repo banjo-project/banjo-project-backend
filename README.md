@@ -1,9 +1,10 @@
 # MY PET PAL Backend
 
-Take care of your puppy, all record at your fingertips!<br />
+Easily Keep Track of Your Puppy's Activities and Well-being!<br />
 <br />
 My Pet Pal is your solution to staying on top of your dog's daily activities.<br />
-Stay updated on what your dog is up to, whether sleeping, walking, pottying, eating and so on. You can invite others to work together with you to ensure that your dog or dogs are well taken care of. You can also notify uncompleted activities to remind of other users. <br />
+Stay updated on what your dog is up to, whether they are sleeping, walking, pottying, eating, etc. You can invite others to work together with you to ensure that your dog or dogs are well taken care of. 
+<br />
 <br />
 My Pet Pal's goal is to make the lives of all dogs happier. Happy dogs means a happier world!<br />
 <br />
@@ -13,14 +14,12 @@ https://banjo-project.herokuapp.com/
 
 ### Features
 
-* Create a pet account connected to user's account and set up pet's daily schedule
-* Login to your account with a unique email address
-* Share daily tasks for your pet with your family memebers and friends
-* Mark completed tasks and save images, comments and completed time.
-* See details of completed task
-* Send notification to other users or get notified of your dog's activities
-* See list of users related with your pet 
-* Invite other users by sending an email
+* Create a pet account and login to your account
+* Share your pet’s daily activities with your family and friends
+* Mark activities as completed
+* Add images and comments to completed activities
+* Notify other users of uncompleted activities
+* Invite other users via email
 * Manage multiple dogs with multiple users
 
 ### Tech/framework used
