@@ -12,6 +12,9 @@ My Pet Pal's goal is to make the lives of all dogs happier. Happy dogs means a h
 ### Deployed backend
 https://banjo-project.herokuapp.com/
 
+### Demo Video
+https://youtu.be/-YDvsXGxs_Y
+
 ### Features
 
 * Create a pet account and login to your account
