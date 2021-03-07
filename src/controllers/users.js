@@ -53,6 +53,16 @@ async function getPetInfo (req, res, next) {
   }
 }
 
+async function getPetInfoAndEvents (req, res, next) {
+  try {
+    const petInfo = await userModel.getPetInfo(req.params.petId)
+    const petEvents = await userModel.getAllEvents(req.params.petId)
+    return res.status(201).send({ petInfo, petEvents})
+  } catch (err) {
+    throw Error (err)
+  }
+}
+
 async function getAllEvents (req, res, next) {
   try {
     const data = await userModel.getAllEvents(req.params.petId)
@@ -96,7 +106,6 @@ async function createCompletedEvent (req, res, next) {
 async function deleteAllEvents (req, res, next) {
   try {
     const data = await userModel.deleteAllEvents(req.params.petId)
-    console.log(data)
     return res.status(201).send({ data })
   } catch (err) {
     return next({ status: 400, message: err })
@@ -106,6 +115,7 @@ async function deleteAllEvents (req, res, next) {
 module.exports = {
   getAllUsers,
   getAllPets,
+  getPetInfoAndEvents,
   getPetUserInfo,
   createUser,
   getUsersForPet,
