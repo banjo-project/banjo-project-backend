@@ -57,7 +57,7 @@ async function getPetInfoAndEvents (req, res, next) {
   try {
     const petInfo = await userModel.getPetInfo(req.params.petId)
     const petEvents = await userModel.getAllEvents(req.params.petId)
-    return res.status(201).send({ petInfo, petEvents})
+    return res.status(201).send({ ...petInfo, events: petEvents})
   } catch (err) {
     throw Error (err)
   }

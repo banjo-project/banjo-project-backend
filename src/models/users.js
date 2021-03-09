@@ -72,6 +72,7 @@ function getAllEvents (petId) {
   return knex('events')
     .select('events.*')
     .leftJoin('completed_events', 'events.id', 'completed_events.event_id')
+    .orderBy('time', 'asc')
     .where({
       'completed_events.completed_time': null,
       'events.pet_id': petId
